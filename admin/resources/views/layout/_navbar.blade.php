@@ -15,7 +15,6 @@
             <ul class="nav navbar-nav">
                 <?php
                 $Dmenus = \App\Models\Nva::where('pid',0)->get();
-//                var_dump($Dmenus);exit;
                 $menus =  \App\Models\Nva::where('pid','!=',0)->get();
                 ?>
                 @foreach($Dmenus as $Dmenu)

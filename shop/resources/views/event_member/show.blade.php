@@ -5,9 +5,9 @@
     @include('layout._errors')
         <div class="form-group">
             <label><h3>抽奖活动详情:</h3></label>
-            <textarea  rows="20" cols="150"> {{ $Event->details}}报名时间：{{$Event->signup_start}}到{{$Event->signup_end}}结束。
+            {!! $Event->details!!} 报名时间：{{$Event->signup_start}}到{{$Event->signup_end}}结束。
                 最高只能有{{$Event->signup_num}}人参加抽奖。
-            </textarea>
+
         </div>
     <?php
             $event_member = \App\Models\EventMember::where('events_id',$Event->id)->get();

@@ -16,7 +16,7 @@
                 <td>{{ $event->signup_start }}</td>
                 <td>{{ $event->signup_end }}</td>
                 <td>
-                    @if($event->is_prize >= 0)
+                    @if($event->is_prize == 0)
                     <a href="{{ route('event_members.result',[$event]) }}" class="btn btn-info">查看结果</a>
                     @else
                     <a href="{{ route('event_members.show',[$event]) }}" class="btn btn-danger">立即报名</a>
