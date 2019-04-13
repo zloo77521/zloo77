@@ -38,7 +38,6 @@ class OrderController extends Controller
         //group by date(created_at)根据时间分组
         $sql="select date(created_at) as date,count(*) as total from orders where created_at >= '{$time_start}' and created_at <='{$time_end}' and shop_id={$shop_id} group by date(created_at)";
         $rows=DB::select($sql);
-
         $result=[];
         for ($i=0;$i<7;$i++){
             $result[date('Y-m-d',strtotime("-{$i} day"))]=0;
@@ -56,16 +55,18 @@ class OrderController extends Controller
         $time_end=date('Y-m-30 23:59:59');
 
         //group by date(created_at)根据时间分组
-        $sql="select date('Y-m') as date,count(*) as total from orders where created_at >= '{$time_start}' and created_at <='{$time_end}' and shop_id={$shop_id} group by date('Y-m')";
+        $sql="select FROM_UNIXTIME(created_at, '%Y-%m') as date,count(*) as total from orders where created_at >= '{$time_start}' and created_at <='{$time_end}' and shop_id={$shop_id} group by FROM_UNIXTIME(created_at, '%Y-%m')";
         $rows=DB::select($sql);
+        dd($rows);
         $result=[];
         for ($i=0;$i<3;$i++){
             $result[date('Y-m',strtotime("-{$i} month"))]=0;
         }
+//        dd($result);
         foreach ($rows as $row ){
             $result[$row->date]=$row->total;
         }
-        dd($result);
+
 
         return view('order.orderMonth',compact('result'));
     }
